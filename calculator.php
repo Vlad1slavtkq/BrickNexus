@@ -14,7 +14,6 @@ if (!isset($_SESSION['user_id'])) {
 
 $userId = $_SESSION['user_id'];
 
-// --- Скрытый AJAX обработчик: обновляет инвентарь на лету ---
 if (isset($_GET['action']) && $_GET['action'] === 'update_inventory' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Content-Type: application/json; charset=utf-8');
     $partId = isset($_POST['part_id']) ? trim($_POST['part_id']) : '';
