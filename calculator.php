@@ -1,5 +1,5 @@
 <?php
-// calculator.php (v4.0 - Async Live Inventory Synchronization)
+// calculator.php 
 error_reporting(E_ALL & ~E_NOTICE);
 require_once 'db.php';
 
@@ -283,7 +283,7 @@ try {
     <script>
         const missingPartsList = <?php echo json_encode($calculationResults); ?> || [];
 
-        // Управление кнопками + и -
+        // + -
         function adjustInventory(partId, change) {
             const input = document.getElementById('inv-' + partId);
             if (!input) return;
@@ -294,12 +294,12 @@ try {
             saveInventory(partId, newVal);
         }
 
-        // Асинхронная отправка измененного количества в базу данных
+    
         function saveInventory(partId, value) {
             let qty = parseInt(value);
             if (isNaN(qty) || qty < 0) qty = 0;
 
-            // Формируем безопасный POST запрос
+        
             const formData = new URLSearchParams();
             formData.append('part_id', partId);
             formData.append('quantity', qty);
@@ -312,7 +312,6 @@ try {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    // Перезагружаем текущую страницу для мгновенного пересчета всех процентов и статусов на бэкенде
                     window.location.reload();
                 } else {
                     alert('Error updating user inventory database: ' + data.message);
